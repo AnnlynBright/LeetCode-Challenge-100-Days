@@ -1,0 +1,23 @@
+class Solution {
+    public int pivotInteger(int n) {
+        
+        int start =0;
+        int end =n;
+        int full = (n*(n+1))/2;
+        while(start<=end)
+        {
+            int mid=(start+end)/2;
+            int first = (mid*(mid+1))/2;
+            int second = full-first +mid;
+            if(first==second)
+            return mid;
+            else if(first<second)
+            {
+                start = mid+1;
+            }
+            else
+            end = mid-1;
+        }
+        return -1;
+    }
+}
