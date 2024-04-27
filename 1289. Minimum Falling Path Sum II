@@ -1,0 +1,30 @@
+class Solution {
+    Integer[][] arr; 
+    public int minFallingPathSum(int[][] grid) {
+        arr = new Integer[grid.length+1][grid[0].length];
+        int res = findGraph(0,0,grid);
+        for(int i=1;i<grid[0].length;i++)
+        {
+            res = Math.min(findGraph(0,i,grid),res);
+           
+        }
+        return res;
+    }
+    public int findGraph(int i, int j, int[][] grid)
+    {
+        if(i==grid.length)
+        return 0;
+        if(arr[i][j]!=null)
+        return arr[i][j];
+        int res = Integer.MAX_VALUE;
+        int f=0;
+        for(int k=0;k<grid[0].length;k++)
+        {
+            if(j==k)
+            continue;
+            res = Math.min(res,findGraph(i+1,k,grid));
+            f=1;
+        }
+        return arr[i][j]=f!=0? res+grid[i][j]:grid[i][j];
+    }
+}
